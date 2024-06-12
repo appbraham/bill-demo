@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,5 +26,8 @@ public class Venta {
     @ManyToOne
     @JoinColumn(name = "idPersona", nullable = false, foreignKey = @ForeignKey(name = "fk_venta_persona"))
     private Persona persona;
+
+    @OneToMany(mappedBy = "venta", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    private List<DetalleVenta> detalleVentaList;
 
 }
