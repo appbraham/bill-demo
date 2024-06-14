@@ -1,5 +1,6 @@
 package com.appbraham.bill.controller;
 
+import com.appbraham.bill.exception.ModeloNotFoundException;
 import com.appbraham.bill.model.Persona;
 import com.appbraham.bill.service.IPersonaService;
 import jakarta.validation.Valid;
@@ -33,5 +34,16 @@ public class PersonaController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(per.getIdPersona()).toUri();
         return ResponseEntity.created(location).build();
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id){
+        Persona per = service.listarPorId(id);
+        if(per.getIdPersona() == null){
+            throw new ModeloNotFoundException("La Persona no existe, ID: " +id);
+        }
+
+        service.eliminar(id);
+        return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
     }
 }
