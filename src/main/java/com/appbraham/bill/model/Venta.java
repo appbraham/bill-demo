@@ -27,7 +27,7 @@ public class Venta {
     @JoinColumn(name = "idPersona", nullable = false, foreignKey = @ForeignKey(name = "fk_venta_persona"))
     private Persona persona;
 
-    @OneToMany(mappedBy = "venta", cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<DetalleVenta> detalleVentaList;
+//    @OneToMany(mappedBy = "venta", cascade = {CascadeType.ALL}, orphanRemoval = true)
+//    private List<DetalleVenta> detalleVentaList;
 
 }

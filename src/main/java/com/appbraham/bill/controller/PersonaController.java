@@ -21,7 +21,7 @@ public class PersonaController {
     private IPersonaService service;
 
     @GetMapping
-    public ResponseEntity<List<Persona>>listar(){
+    public ResponseEntity<List<Persona>>listar() throws Exception{
 
         List<Persona>lista = service.listar();
 
@@ -29,7 +29,7 @@ public class PersonaController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> registrar(@Valid @RequestBody Persona persona){
+    public ResponseEntity<Object> registrar(@Valid @RequestBody Persona persona) throws Exception{
         Persona per = service.registrar(persona);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(per.getIdPersona()).toUri();
         return ResponseEntity.created(location).build();
@@ -37,7 +37,7 @@ public class PersonaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id){
+    public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id) throws Exception {
         Persona per = service.listarPorId(id);
         if(per.getIdPersona() == null){
             throw new ModeloNotFoundException("La Persona no existe, ID: " +id);
