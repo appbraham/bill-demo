@@ -21,11 +21,22 @@ public class PersonaController {
     private IPersonaService service;
 
     @GetMapping
-    public ResponseEntity<List<Persona>>listar() throws Exception{
+    public ResponseEntity<List<Persona>> listar() throws Exception{
 
         List<Persona>lista = service.listar();
 
         return new ResponseEntity<List<Persona>>(lista, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Persona> listarPorId(@PathVariable Integer id) throws Exception{
+        Persona persona = service.listarPorId(id);
+
+        if(persona == null){
+            throw new ModeloNotFoundException("ID no encontrado: " +id);
+        }
+
+        return new ResponseEntity<Persona>(persona, HttpStatus.OK);
     }
 
     @PostMapping
