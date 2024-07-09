@@ -1,9 +1,13 @@
 package com.appbraham.bill.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "detalle_venta")
+@Getter
+@Setter
 public class DetalleVenta {
 
     @Id
