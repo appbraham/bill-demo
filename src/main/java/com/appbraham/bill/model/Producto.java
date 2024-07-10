@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -22,4 +24,9 @@ public class Producto {
     @Size(min = 2, message = "La marca debe de tener 2 caracteres como mínimo")
     @Column(name = "marca", nullable = false, length = 150)
     private String marca;
+
+    @OneToMany(mappedBy = "producto", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    private List<DetalleVenta> detalleVentaLista;
+
+
 }
